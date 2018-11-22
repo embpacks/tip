@@ -5,8 +5,8 @@
  *      Author: SERAGUD
  */
 
-#ifndef TIP_ICMP_H_
-#define TIP_ICMP_H_
+#ifndef TIP_ICMP_HPP_
+#define TIP_ICMP_HPP_
 
 typedef enum {
 	/// Echo reply
@@ -45,4 +45,4 @@ typedef struct {
 	uint16_t seqnum;
 }__attribute__((packed)) IcmpEchoHdr;
 
-#endif /* TIP_ICMP_H_ */
+#endif /* TIP_ICMP_HPP_ */

@@ -1,13 +1,22 @@
 /*
- * tip.cpp
+ * ip4_header.cpp
  *
- *  Created on: 24 apr. 2018
+ *  Created on: 4 juni 2018
  *      Author: SERAGUD
  */
 
-#include "tip/tip.h"
 
-#include <stdint.h>
+#include <tip/tip.hpp>
+
+Ip4Addr Ip4Header::getSrcAddr() const {
+	return Ip4Addr(srcAddr, true);
+}
+
+// TODO set Src address
+
+Ip4Addr Ip4Header::getDestAddr() const {
+	return Ip4Addr(destAddr, true);
+}
 
 const Ip4Addr Ip4Addr::none = Ip4Addr(0xffffffffUL);
 
@@ -35,16 +44,7 @@ Ip4Addr::Ip4Addr(uint32_t addr, bool bigendian) {
 	}
 }
 
-Ip4Addr Ip4Addr::network(uint32_t netmask) {
-	return Ip4Addr(addr & netmask);
-}
-
-Ip4Addr Ip4Addr::network(uint32_t netmask[4]) {
-	return Ip4Addr(bytes[0] & netmask[0], bytes[1] & netmask[1],
-			bytes[2] & netmask[2], bytes[3] & netmask[3]);
-}
-
-Ip4Addr Ip4Addr::network(Ip4Addr netmask) {
+Ip4Addr Ip4Addr::network(const Ip4Addr& netmask) const {
 	return Ip4Addr(addr & netmask.addr, true);
 }
 
@@ -52,10 +52,4 @@ ostream& operator<<(ostream& os, Ip4Addr& addr) {
 	os << uint32_t(addr.bytes[0]) << '.' << uint32_t(addr.bytes[1]) << '.'
 			<< uint32_t(addr.bytes[2]) << '.' << uint32_t(addr.bytes[3]);
 	return os;
-}
-
-void ip4Receive(uint8_t *buf, uint32_t length) {
-
-
-	// TODO
 }

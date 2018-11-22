@@ -344,4 +344,8 @@ static inline uint16_t uint16_time_difference(uint16_t const earliest,
 	}
 }
 
+static inline uint16_t uint16_switchEndian(uint16_t const value) {
+	return uint16_make_from_bytes(uint16_get_lo_byte(value), uint16_get_hi_byte(value));
+}
+
 #endif /* SRC_TYPES_H_ */
